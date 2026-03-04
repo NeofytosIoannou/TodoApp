@@ -104,6 +104,7 @@ async def get_current_user(request: Request = None,
                             detail='Could not validate user.')
 
 
+@router.post("", status_code=status.HTTP_201_CREATED, include_in_schema=False)
 @router.post("/", status_code=status.HTTP_201_CREATED)
 async def create_user(db: db_dependency,
                       create_user_request: CreateUserRequest):
@@ -157,6 +158,7 @@ async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm,
 
 
 @router.post('/logout', status_code=status.HTTP_204_NO_CONTENT)
+@router.post('/logout/', status_code=status.HTTP_204_NO_CONTENT, include_in_schema=False)
 async def logout(response: Response):
     response.delete_cookie(key=settings.cookie_name, path='/')
 
