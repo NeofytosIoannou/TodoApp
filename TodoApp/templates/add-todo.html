@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block title %}Add Todo{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      Make a new todo
+    </div>
+    <div class="card-body">
+      <form id="todoForm">
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" class="form-control" name="title" required>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea class="form-control" rows="3" name="description" required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Priority</label>
+          <select class="form-control" name="priority">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        {% if user and (user.get('user_role')|lower) == 'admin' %}
+        <div class="form-group">
+          <label>Assign to user</label>
+          <select class="form-control" name="owner_id">
+            <option value="">Myself</option>
+            {% for assignable_user in assignable_users %}
+            <option value="{{ assignable_user.id }}">{{ assignable_user.username }} (ID: {{ assignable_user.id }})</option>
+            {% endfor %}
+          </select>
+        </div>
+        {% endif %}
+        <button type="submit" class="btn btn-primary"> Add new todo </button>
+        <a href="/todos/todo-page" class="btn btn-success">Back</a>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
