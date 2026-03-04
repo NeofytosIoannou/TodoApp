@@ -16,6 +16,9 @@ if parsed_url.drivername != "sqlite" and not parsed_url.host:
 engine_kwargs = {}
 if parsed_url.drivername == "sqlite":
 	engine_kwargs["connect_args"] = {"check_same_thread": False}
+elif parsed_url.drivername.startswith("postgresql"):
+	if "sslmode" not in parsed_url.query:
+		engine_kwargs["connect_args"] = {"sslmode": settings.db_sslmode}
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL, **engine_kwargs)
 

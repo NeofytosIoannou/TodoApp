@@ -4,6 +4,8 @@ from .database import engine
 from .routers import auth, todos, admin, users
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
+from starlette.responses import JSONResponse
+from sqlalchemy.exc import SQLAlchemyError
 from pathlib import Path
 from fastapi.templating import Jinja2Templates
 
@@ -28,6 +30,14 @@ def test(request: Request):
 @app.get("/healthy")
 def health_check():
     return {'status': 'Healthy'}
+
+
+@app.exception_handler(SQLAlchemyError)
+async def database_exception_handler(request: Request, exc: SQLAlchemyError):
+    return JSONResponse(
+        status_code=503,
+        content={"detail": "Database connection/configuration error."},
+    )
 
 
 app.include_router(auth.router)

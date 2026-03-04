@@ -10,6 +10,7 @@ def _to_bool(value: str | None, default: bool = False) -> bool:
 class Settings:
     def __init__(self) -> None:
         self.database_url = os.getenv("DATABASE_URL", "sqlite:///./todosapp.db")
+        self.db_sslmode = os.getenv("DB_SSLMODE", "require")
         self.secret_key = os.getenv(
             "SECRET_KEY",
             "197b2c37c391bed93fe80344fe73b806947a65e36206e05a1a23c2fa12702fe3",
