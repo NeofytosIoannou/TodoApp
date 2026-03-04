@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', path='/css/base.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', path='/css/bootstrap.css') }}">
+  <link rel="stylesheet" type="text/css" href="/static/css/base.css?v=20260304">
+  <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css?v=20260304">
     <meta charset="UTF-8">
     <title>{% block title %}TodoApp{% endblock %}</title>
 </head>
@@ -16,9 +16,9 @@
 
   {% endblock %}
 
-    <script src="{{ url_for('static', path='/js/jquery-slim.js') }}?v=20260304"></script>
-    <script src="{{ url_for('static', path='/js/popper.js') }}?v=20260304"></script>
-    <script src="{{ url_for('static', path='/js/bootstrap.js') }}?v=20260304"></script>
-    <script src="{{ url_for('static', path='/js/base.js') }}?v=20260304" defer></script>
+    <script src="/static/js/jquery-slim.js?v=20260304"></script>
+    <script src="/static/js/popper.js?v=20260304"></script>
+    <script src="/static/js/bootstrap.js?v=20260304"></script>
+    <script src="/static/js/base.js?v=20260304" defer></script>
 </body>
 </html>
