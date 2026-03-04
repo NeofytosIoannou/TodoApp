@@ -3,6 +3,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError
 from starlette import status
 from ..database import SessionLocal
 from ..models import Users
@@ -118,7 +119,12 @@ async def create_user(db: db_dependency,
     )
 
     db.add(create_user_model)
-    db.commit()
+    try:
+        db.commit()
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail='Username or email already exists.')
 
 
 @router.post("/token", response_model=Token)

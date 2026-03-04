@@ -156,9 +156,8 @@
                 showToast('Todo updated successfully.', 'success');
                 window.location.href = '/todos/todo-page'; // Redirect to the todo page
             } else {
-                // Handle error
-                const errorData = await response.json();
-                showToast(`Error: ${errorData.detail}`, 'danger');
+                const errorMessage = await parseErrorMessage(response);
+                showToast(`Error: ${errorMessage}`, 'danger');
             }
         } catch (error) {
             console.error('Error:', error);
@@ -185,9 +184,8 @@
                     showToast('Todo deleted successfully.', 'success');
                     window.location.href = '/todos/todo-page'; // Redirect to the todo page
                 } else {
-                    // Handle error
-                    const errorData = await response.json();
-                    showToast(`Error: ${errorData.detail}`, 'danger');
+                    const errorMessage = await parseErrorMessage(response);
+                    showToast(`Error: ${errorMessage}`, 'danger');
                 }
             } catch (error) {
                 console.error('Error:', error);
@@ -232,9 +230,8 @@
                     showToast('Login successful.', 'success');
                     window.location.href = '/todos/todo-page'; // Change this to your desired redirect page
                 } else {
-                    // Handle error
-                    const errorData = await response.json();
-                    showToast(`Error: ${errorData.detail}`, 'danger');
+                    const errorMessage = await parseErrorMessage(response);
+                    showToast(`Error: ${errorMessage}`, 'danger');
                 }
             } catch (error) {
                 console.error('Error:', error);
@@ -286,9 +283,8 @@
                     showToast('Registration successful. Please login.', 'success');
                     window.location.href = '/auth/login-page';
                 } else {
-                    // Handle error
-                    const errorData = await response.json();
-                    showToast(`Error: ${errorData.message || errorData.detail}`, 'danger');
+                    const errorMessage = await parseErrorMessage(response);
+                    showToast(`Error: ${errorMessage}`, 'danger');
                 }
             } catch (error) {
                 console.error('Error:', error);
