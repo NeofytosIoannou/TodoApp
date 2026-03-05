@@ -22,6 +22,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Info</th>
+                        <th scope="col">Priority</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -31,6 +32,7 @@
                 <tr class="pointer">
                     <td>{{loop.index}}</td>
                     <td>{{todo.title}}</td>
+                    <td>{{todo.priority}}</td>
                     <td>
                         <button onclick="window.location.href='edit-todo-page/{{todo.id}}'"
                                 type="button" class="btn btn-info">
@@ -42,6 +44,7 @@
                 <tr class="pointer alert alert-success">
                     <td>{{loop.index}}</td>
                     <td class="strike-through-td">{{todo.title}}</td>
+                    <td>{{todo.priority}}</td>
                     <td>
                         <button onclick="window.location.href='edit-todo-page/{{todo.id}}'"
                                 type="button" class="btn btn-info">
