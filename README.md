@@ -79,8 +79,11 @@ http://127.0.0.1:8000/redoc
 The API uses **JWT tokens with OAuth2**.
 
 ### Admin Login
-
 username: neo  
+password: 1234
+
+## Regular User Login
+username: user1  
 password: 1234
 
 After logging in you will receive a **JWT token** which must be used to access protected endpoints.
