@@ -6,6 +6,12 @@ from .config import settings
 
 SQLALCHEMY_DATABASE_URL = settings.database_url.strip().strip('"').strip("'")
 
+if settings.is_render and not settings.database_url_from_env:
+    raise ValueError(
+        "DATABASE_URL is not set on Render. Set Render Postgres Internal Database URL "
+        "or use a persistent disk path (e.g. sqlite:////var/data/todosapp.db)."
+    )
+
 if SQLALCHEMY_DATABASE_URL.startswith("postgres://"):
     SQLALCHEMY_DATABASE_URL = SQLALCHEMY_DATABASE_URL.replace("postgres://", "postgresql://", 1)
 

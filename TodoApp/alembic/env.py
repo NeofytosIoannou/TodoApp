@@ -4,10 +4,19 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 from alembic import context
 import models
+from config import settings
+
+
+def _normalized_database_url() -> str:
+    database_url = settings.database_url.strip().strip('"').strip("'")
+    if database_url.startswith("postgres://"):
+        return database_url.replace("postgres://", "postgresql://", 1)
+    return database_url
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
+config.set_main_option("sqlalchemy.url", _normalized_database_url())
 fileConfig(config.config_file_name)
 target_metadata = models.Base.metadata
 
